@@ -14,49 +14,71 @@ import java.util.Random;
  */
 public class Main {
     public static void main(String[] args){
-        PileEntiers 
-                p1 = new PileEntiers(),
-                p2 = new PileEntiers(), 
-                p3 = new PileEntiers(),
-                p_intermediare = new PileEntiers();
-        
-        //initialisation
-        for (int i = 0; i < 10; i++)
-            p1.Empiler((int) (Math.random()*100));
-        
-        // affichage
-        System.out.print("p1 ");
-        p1.afficher();
+      PileEntiers P1 = new PileEntiers();
+               PileEntiers P2 = new PileEntiers();
+               PileEntiers P3 = new PileEntiers();
+               PileEntiers P4 = new PileEntiers();
+               SecureRandom Rand = new SecureRandom();
+               for (int i =0 ;i<5;i++)
+               {
+                   int nombre =-1;
+                   do {
+                   nombre =Rand.nextInt();
+                   }while(nombre<0);
+                   P1.Empiler((int)nombre); // we can also use rand.nextInt or window.crypto.getRandomValues to be more secure to generate a random number and not a pseudo random number
+                   //we use max value to get something not out of field for an int 
+               }
+               //display
+        System.out.print("p1 : ");
+        P1.afficher();
+        System.out.println("");
         
         System.out.print("p2 ");
-        p3.afficher();
+        P2.afficher();
+         System.out.println("");
         
         System.out.print("p3 ");
-        p3.afficher();
+        P3.afficher();
+        System.out.println("");
         
-        //1- depiler dans une pile intermediaire
-        for (int i = 0; i < 10; i++) //pour retourver (plus loin) les élements dans le meme ordre que dans 1
-            p_intermediare.Empiler(p1.Depiler());
+         for (int i =0 ;i<5;i++)
+               {
+                   P4.Empiler(P1.Depiler());  // we put all the stack into an another stack to keep it 
+                    
+               }
+         
+                for (int i = 0; i < 5; i++) {
+             int number = P4.Depiler(); //we stack out the stack P1
+             P1.Empiler(number); // we re put the P1 stack at the same time as the other to get it at the end the original stack as the same
+            if (number % 2 == 0) //even
+                P2.Empiler(number);
+            else //uneven
+                P3.Empiler(number);
+            
+             System.out.print("p1 : ");
+        P1.afficher();
+        System.out.println("");
         
-        //2- empiler ensuite en vérifiant si pair
-        for (int i = 0; i < 10; i++) {
-            int elem = p_intermediare.Depiler();
-            p1.Empiler(elem);
-            if (elem % 2 == 0) //pair
-                p2.Empiler(elem);
-            else //impair
-                p3.Empiler(elem);
+        System.out.print("p2 ");
+        P2.afficher();
+         System.out.println("");
+        
+        System.out.print("p3 ");
+        P3.afficher();
+        System.out.println("");
         }
         
-        //affichage
-        System.out.print("p1 ");
-        p1.afficher();
+         System.out.print("p1 : ");
+        P1.afficher();
+        System.out.println("");
         
         System.out.print("p2 ");
-        p2.afficher();
+        P2.afficher();
+         System.out.println("");
         
         System.out.print("p3 ");
-        p3.afficher();
+        P3.afficher();
+        System.out.println("");
         
     }
 }
